@@ -1,0 +1,127 @@
+body, html{
+  margin:0;
+  height:100%;
+}
+
+.page{
+  flex:1 1 auto;
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+.window._active{
+  display:block;
+}
+/*Окно приложения*/
+.window{
+  display:none;
+  width:100%;
+  height:100%;
+  background-color: white;
+}
+@media(max-width:750px){
+  .window{
+    margin:50px 30px;
+  }
+}
+
+.window._fullscreen{
+  max-width:100%;
+  height:100%;
+  margin:0;
+}
+
+/*Строка инструментов приложения*/
+.window__toolbar{
+  background-color:#0F1117;
+  color:white;
+  height:30px;
+  display:flex;
+  justify-content:space-between;
+}
+nav p{
+  margin:0;
+  padding-left:5px;
+  font-size:15px;
+  line-height:24px;
+}
+.panel{
+  display:flex;
+  align-items:center;
+}
+hr{
+  border:none;
+  cursor:pointer;
+  width:40px;
+  height:100%;
+  position:relative;
+  margin:0;
+}
+.escape:after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:0; right:0;
+  margin:auto;
+  width:7px;
+  height:1px;
+  border-bottom:1px solid white;
+}
+.fullscreen:after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:0; right:0;
+  margin:auto;
+  width:7px;
+  height:5px;
+  border:1px solid white;
+}
+.close:after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:0; right:0;
+  margin:auto;
+  width:10px;
+  height:1px;
+  transform:rotate(-45deg);
+  border-bottom:1px solid white;
+}
+.close:before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  left:1px; right:0;
+  margin:auto;
+  width:10px;
+  height:1px;
+  transform:rotate(45deg);
+  border-bottom:1px solid white;
+}
+hr:hover{
+  background-color:#0ea4d3;
+}
+.close:hover{
+  background-color:red;
+}
+
+/*Контент приложения*/
+.window__body{
+  padding:50px 10px 10px 10px;
+  line-height:26px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.table{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th,
+td{
+  border: 1px solid black;
+  padding: 5px;
+}

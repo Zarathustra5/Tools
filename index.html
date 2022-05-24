@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IT-компания</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!--Присоединение модулей-->
+  <main class="page">
+    <div class="window _active">
+      <nav class="window__toolbar">
+        <p>Панель управления IT-предприятием</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <table class="table table_departments">
+          <thead>
+            <tr>
+              <th>Название отдела</th>
+              <th>Колличество проектов</th>
+              <th>Объем финансирования</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Отдел 1</td>
+              <td>2</td>
+              <td>30 000$</td>
+            </tr>
+            <tr>
+              <td>Отдел 2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>Отдел 3</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table_projects">
+          <thead>
+            <tr>
+              <th>Название проекта</th>
+              <th>Объем финансирования</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Проект 1</td>
+              <td>20 000$</td>
+            </tr>
+            <tr>
+              <td>Проект 2</td>
+              <td>10 000$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="window dialogue dialogue_output">
+      <nav class="window__toolbar">
+        <p>Программа Institution</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <p class="label">Вывод</p>
+        <p></p>
+      </div>
+    </div>
+  </main>
+  <script src="js/project.js"></script>
+  <script src="js/department.js"></script>
+  <script src="js/company.js"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>
