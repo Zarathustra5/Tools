@@ -5,6 +5,8 @@ let dialogueOutput = document.querySelector(".dialogue_output");
 let answer;
 let currentPlan = null;
 
+let tableCompany = document.querySelector(".table_company");
+
 //Асинхронность
 function submit(callback){
   dialogueForm.onsubmit = () => callback(answer); 
@@ -44,6 +46,7 @@ function addDepartment() {
   dialogueInput.querySelector(".label").textContent = "Введите название отдела: ";
   dialogueInput.classList.add("_active");
   submit(answer => itCompany.addDepartment = answer);
+  tableCompany.lastElementChild.append(`<tr title="Кликните для просмотра проектов"><td>${answer}</td><td>0</td><td>0$</td></tr>`);
 }
 
 //4.Удалить отдел
