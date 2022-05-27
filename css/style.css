@@ -163,3 +163,7 @@ th{
 tr{
   cursor: pointer;
 }
+.department{
+  bottom: 50px;
+  left: 30px;
+}

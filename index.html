@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!--Присоединение модулей-->
   <main class="page">
     <div class="window main-window _active">
       <nav class="window__toolbar">
@@ -30,27 +29,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr title="Кликните для просмотра проектов">
-              <td>Отдел 1</td>
-              <td>2</td>
-              <td>30 000$</td>
-            </tr>
-            <tr>
-              <td>Отдел 2</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>Отдел 3</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
           </tbody>
         </table>
         <table class="table table_projects">
           <thead>
             <tr>
-              <th colspan="2">Проект: </th>
+              <th colspan="2">Отдел: </th>
             </tr>
             <tr>
               <th>Название проекта</th>
@@ -58,13 +42,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Проект 1</td>
-              <td>20 000$</td>
-            </tr>
-            <tr> <td>Проект 2</td>
-              <td>10 000$</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -81,19 +58,17 @@
       <div class="window__body">
         <h2 class="title">Выберите функцию</h2>
         <ol>
-          <li onclick="getName()">Вывести название предприятия</li>    <!--События нажатия-->
-          <li onclick="setName()">Изменить название предприятия</li>
+          <li onclick="companyGetName()">Вывести название предприятия</li>    <!--События нажатия-->
+          <li onclick="companySetName()">Изменить название предприятия</li>
           <li onclick="addDepartment()">Добавить отдел</li>
-          <li onclick="deleteDepartment()">Удалить последний добавленный отдел</li>
-          <li onclick="searchDepartment()">Найти индекс плана по названию (от 0)</li>
+          <li onclick="deleteDepartment()">Удалить первый добавленный отдел</li>
           <li onclick="chooseDepartment()">Выбрать отдел</li>
         </ol>
       </div>
     </div>
-    <div class="window plan">
+    <div class="window department">
       <nav class="window__toolbar">
-        <p>Панель управления</p>
-        <div class="panel">
+        <p>Панель управления отделом</p>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -103,13 +78,10 @@
       <div class="window__body">
         <h2 class="title">Выберите функцию</h2>
         <ol>
-          <li onclick="showPlanName()">Вывести название плана</li>    <!--События нажатия-->
-          <li onclick="changePlanName()">Изменить название плана</li>
-          <li onclick="showPlanHours()">Вывести число часов по названию предмета</li>
-          <li onclick="addPlanHours()">Добавить предмет и количество часов</li>
-          <li onclick="changePlanHours()">Изменить число часов по названию предмета</li>
-          <li onclick="showPlanSum()">Сумма всех часов</li>
-          <li onclick="showPlanData()">Показать всю информацию</li>
+          <li onclick="departmentGetName()">Вывести название отдела</li>    <!--События нажатия-->
+          <li onclick="departmentSetName()">Изменить название отдела</li>
+          <li onclick="addProject()">Добавить проект</li>
+          <li onclick="deleteProject()">Удалить проект</li>
         </ol>
       </div>
     </div>
@@ -142,7 +114,21 @@
         <p></p>
       </div>
     </div>
+    <div class="window dialogue dialogue_alert">
+      <nav class="window__toolbar">
+        <p>Панель управления</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body dialogue__form">
+        <p class="label"></p>
+      </div>
+    </div>
   </main>
+  <!--Присоединение модулей-->
   <script src="js/project.js"></script>
   <script src="js/department.js"></script>
   <script src="js/company.js"></script>

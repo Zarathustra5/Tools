@@ -2,10 +2,12 @@
 let dialogueInput = document.querySelector(".dialogue_input");
 let dialogueForm = document.querySelector(".dialogue__form");
 let dialogueOutput = document.querySelector(".dialogue_output");
+let dialogueAlert = document.querySelector(".dialogue_alert");
 let answer;
-let currentPlan = null;
+let currentDepartment = null;
 
 let tableCompany = document.querySelector(".table_company");
+let tableProjects = document.querySelector(".table_projects");
 
 //Асинхронность
 function submit(callback){
@@ -29,15 +31,14 @@ let itCompany;
 submit(answer => itCompany = new Company(answer));
 
 //1.Вывести название преприятия
-function getName() {
+function companyGetName() {
   dialogueOutput.classList.add("_active");
   dialogueOutput.lastElementChild.lastElementChild.textContent = itCompany.getName;
 }
 
 //2.Изменить название предприятия
-function setName() {
-  dialogueInput.querySelector(".label").textContent = "Введите новое название предприятия: ";
-  dialogueInput.classList.add("_active");
+function companySetName() {
+  dialogueInput.querySelector(".label").textContent = "Введите новое название предприятия: "; dialogueInput.classList.add("_active");
   submit(answer => itCompany.setName = answer);
 }
 
@@ -45,24 +46,36 @@ function setName() {
 function addDepartment() {
   dialogueInput.querySelector(".label").textContent = "Введите название отдела: ";
   dialogueInput.classList.add("_active");
-  submit(answer => itCompany.addDepartment = answer);
-  tableCompany.lastElementChild.append(`<tr title="Кликните для просмотра проектов"><td>${answer}</td><td>0</td><td>0$</td></tr>`);
+  submit(answer => {
+    itCompany.addDepartment = answer;
+    tableCompany.lastElementChild.insertAdjacentHTML("beforeend", `<tr class="${answer}" title="Кликните для просмотра проектов"><td>${answer}</td><td>0</td><td>0$</td></tr>`);
+  });
 }
 
 //4.Удалить отдел
 function deleteDepartment() {
-  dialogueOutput.classList.add("_active");
-  dialogueOutput.lastElementChild.lastElementChild.textContent = itCompany.deleteDepartment();
+  if (itCompany.deleteDepartment()){
+    tableCompany.lastElementChild.firstElementChild.remove();
+  }else{
+    dialogueAlert.querySelector(".label").textContent = "Отделы не найдены";
+    dialogueAlert.classList.add("_active");
+  }
 }
 
-//5.Найти отдел
-function searchDepartment() {
-  alert(itCompany.searchDepartment(prompt("Введите название плана")));
-}
-
-//7.Выбрать план
+//5.Выбрать отдел
 function chooseDepartment() {
-  itCompany.chooseDepartment();
+  dialogueInput.querySelector(".label").textContent = "Введите название отдела: ";
+  dialogueInput.classList.add("_active");
+  submit(answer => {
+    let searchResult = itCompany.chooseDepartment(answer); 
+    if (searchResult){
+      document.querySelector(".department").classList.add("_active");
+      currentDepartment = searchResult;
+    }else{
+      dialogueAlert.querySelector(".label").textContent = "Отдел не найден";
+      dialogueAlert.classList.add("_active");
+    }
+  });
 }
 
 //Кнопка закрыть
@@ -85,36 +98,54 @@ fullscreenBtn.forEach(el => {
 });
 
 //-----События нажатия на элементы меню------
-//1.Вывести название плана
-function showPlanName() {
-  alert(currentPlan.getName);
+//1.Вывести название отдела
+function departmentGetName() {
+  dialogueOutput.classList.add("_active");
+  dialogueOutput.lastElementChild.lastElementChild.textContent = currentDepartment.getName;
 }
 
-//2.Изменить название плана
-function changePlanName() {
-  currentPlan.setName = prompt("Введите новое название:");
+//2.Изменить название отдела
+function departmentSetName() {
+  dialogueInput.querySelector(".label").textContent = "Введите новое название отдела: ";
+  dialogueInput.classList.add("_active");
+  submit(answer => {
+    tableCompany.querySelector(`.${currentDepartment.getName}`).firstElementChild.textContent = answer;
+    currentDepartment.setName = answer;
+  });
 }
 
-//3.Вывести предмет
-function showPlanHours() {
-  alert(currentPlan.getHours(prompt("Введите название предмета:")));
+//3.Добавить проект
+function addProject() {
+  let beforeAfter;
+  let projectFromList;
+  dialogueInput.querySelector(".label").textContent = "перед/после: ";
+  dialogueInput.classList.add("_active");
+  submit(answer => {
+    beforeAfter = answer;
+    dialogueInput.querySelector(".label").textContent = "Введите название проекта из списка: ";
+    dialogueInput.classList.add("_active");
+    submit(answer => {
+      projectFromList = answer;
+      dialogueInput.querySelector(".label").textContent = "Введите название проекта: ";
+      dialogueInput.classList.add("_active");
+      let result = currentDepartment.addProject(answer, projectFromList, beforeAfter); 
+      submit(answer => {
+        if (result == 1){
+          tableProjects.lastElementChild.insertAdjacentHTML("beforeend", `<tr class="${answer}" title="Кликните для просмотра проектов"><td>${answer}</td><td>0$</td></tr>`);
+        }else if (result == 2){
+          if (beforeAfter == "перед"){
+            tableProjects.querySelector(`.${projectFromList}`).insertAdjacentHTML("beforebegin", `<tr class="${answer}" title="Кликните для просмотра проектов"><td>${answer}</td><td>0$</td></tr>`);
+          }else{
+            tableProjects.querySelector(`.${projectFromList}`).insertAdjacentHTML("afterend", `<tr class="${answer}" title="Кликните для просмотра проектов"><td>${answer}</td><td>0$</td></tr>`);
+          }
+        }else{
+          alert("Ошибка");
+        }
+      });
+    });
+  });
 }
 
-//4.Добавить предмет и часы
-function addPlanHours() {
-  currentPlan.addHours(prompt("Введите название предмета:"), prompt("Введите количество часов:")); }
-
-//5.Изменить часы
-function changePlanHours() {
-  currentPlan.changeHours(prompt("Введите название предмета:"), prompt("Введите новое значение:"));
-}
-
-//6.Сумма
-function showPlanSum() {
-  alert(currentPlan.getHoursSum);
-}
-
-//7.Показать всю информацию
-function showPlanData() {
-  alert(currentPlan.getData);
+//4.Удалить проект
+function deleteProject() {
 }

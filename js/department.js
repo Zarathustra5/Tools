@@ -10,29 +10,30 @@ class Department{
   }
   set setName(newName){   //Сеттер, изменяющий название отделения
     this._name = newName;
-    alert("Название отдела успешно изменено");
   }
-  addProject(projectName){      //Метод добавления проекта
+  addProject(projectName, projectFromList, beforeAfter){      //Метод добавления проекта
     if (this._projects.length > 0){
-      let indexOfProject = this.searchProject(prompt("Введите название проекта из списка"));
+      let indexOfProject = this.searchProject(projectFromList);
       if (indexOfProject !== null){
-        if (prompt("Добавить перед/после") == "перед"){
+        if (beforeAfter == "перед"){
           for (let i = this._projects.length; i > indexOfProject; i--){
             this._projects[i] = this._projects[i - 1];
           }
           this._projects[indexOfProject] = new Project(projectName);
+          return 2;
         }else{
           for (let i = this._projects.length; i > indexOfProject; i--){
             this._projects[i] = this._projects[i - 1];
           }
           this._projects[indexOfProject + 1] = new Project(projectName);
-
+          return 2;
         }
       }else{
-        alert("Проект не найден");
+        return 0;
       }
     }else{
       this._projects.push(new Project(projectName));
+      return 1;
     }
   }
   deleteProject(projectName){       //Метод удаления проекта
