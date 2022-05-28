@@ -9,14 +9,12 @@ class Project{
   }
   set setName(newName){   //Сеттер, изменяющий название проекта
     this._name = newName;
-    alert("Название проекта успешно изменено");
   }
   get getFinance(){         //Геттер, возвращающий объем финансирования
     return this._finance;
   }
   set setFinance(newFinance){         //Сеттер, изменяющий объем финансирования
     this._finance = newFinance;
-    alert("Объем финансирования успешно изменен");
   }
   get getInfo(){   //Геттер, возвращающий полную информацию
     return `Проект: ${this._name}\n\tОбъем финансирования: ${this._finance}`;

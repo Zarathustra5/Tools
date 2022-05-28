@@ -10,7 +10,6 @@ class Company{
   }
   set setName(newName){   //Сеттер, изменяющий название предприятия
     this._name = newName;
-    alert("Название предприятия успешно изменено");
   }
   set addDepartment(departmentName){       //Метод добавления отделения
     if (this._pCaption.next != null){

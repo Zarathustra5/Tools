@@ -9,7 +9,10 @@
   <main class="page">
     <div class="window main-window _active">
       <nav class="window__toolbar">
-        <p>Панель управления IT-предприятием</p>
+        <div class="menu">
+          <p>.js</p>
+          <button class="open-panel">Открыть панель</button>
+        </div>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -20,7 +23,7 @@
         <table class="table table_company">
           <thead>
             <tr>
-              <th colspan="3">IT-предприятие: </th>
+              <th colspan="3">IT-предприятие: <span></span></th>
             </tr>
             <tr>
               <th>Название отдела</th>
@@ -31,10 +34,10 @@
           <tbody>
           </tbody>
         </table>
-        <table class="table table_projects">
+        <table class="table table_department">
           <thead>
             <tr>
-              <th colspan="2">Отдел: </th>
+              <th colspan="2">Отдел: <span></span></th>
             </tr>
             <tr>
               <th>Название проекта</th>
@@ -46,9 +49,9 @@
         </table>
       </div>
     </div>
-    <div class="window company _active">
+    <div class="window window_menu company _active">
       <nav class="window__toolbar">
-        <p>Панель управления IT-предприятием</p>
+        <p>.js</p>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -56,19 +59,19 @@
         </div>
       </nav>
       <div class="window__body">
-        <h2 class="title">Выберите функцию</h2>
-        <ol>
-          <li onclick="companyGetName()">Вывести название предприятия</li>    <!--События нажатия-->
-          <li onclick="companySetName()">Изменить название предприятия</li>
-          <li onclick="addDepartment()">Добавить отдел</li>
-          <li onclick="deleteDepartment()">Удалить первый добавленный отдел</li>
-          <li onclick="chooseDepartment()">Выбрать отдел</li>
-        </ol>
+        <h2 class="title">Управление предприятием</h2>
+        <div class="buttons">
+          <button onclick="companySetName()">Изменить название предприятия</button> <!--События нажатия-->
+          <button onclick="addDepartment()">Добавить отделение</button>
+          <button onclick="deleteDepartment()">Удалить первый добавленный отделение</button>
+          <button onclick="countFinance()">Подсчет объема финансирования предприятия</button>
+          <button onclick="chooseDepartment()">Выбрать отделение</button>
+        </div>
       </div>
     </div>
-    <div class="window department">
+    <div class="window window_menu department">
       <nav class="window__toolbar">
-        <p>Панель управления отделом</p>
+        <p>.js</p>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -76,18 +79,35 @@
         </div>
       </nav>
       <div class="window__body">
-        <h2 class="title">Выберите функцию</h2>
-        <ol>
-          <li onclick="departmentGetName()">Вывести название отдела</li>    <!--События нажатия-->
-          <li onclick="departmentSetName()">Изменить название отдела</li>
-          <li onclick="addProject()">Добавить проект</li>
-          <li onclick="deleteProject()">Удалить проект</li>
-        </ol>
+        <h2 class="title">Управление отделением</h2>
+        <div class="buttons">
+          <button onclick="departmentSetName()">Изменить название отделения</button> <!--События нажатия-->
+          <button onclick="addProject()">Добавить проект</button>
+          <button onclick="deleteProject()">Удалить проект</button>
+          <button onclick="chooseProject()">Выбрать проект</button>
+        </div>
+      </div>
+    </div>
+    <div class="window window_menu project">
+      <nav class="window__toolbar">
+        <p>.js</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <div class="window__body">
+        <h2 class="title">Управление проектом</h2>
+        <div class="buttons">
+          <button onclick="projectSetName()">Изменить название проекта</button>
+          <button onclick="setFinance()">Изменить объем финансирования</button>
+        </div>
       </div>
     </div>
     <div class="window dialogue dialogue_input _active">
       <nav class="window__toolbar">
-        <p>Панель управления</p>
+        <p>.js</p>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -100,9 +120,24 @@
         <button class="button" type="submit">Далее</button>
       </form>
     </div>
+    <div class="window dialogue dialogue_input-number">
+      <nav class="window__toolbar">
+        <p>.js</p>
+        <div class="panel">
+          <hr class="escape">
+          <hr class="fullscreen">
+          <hr class="close">
+        </div>
+      </nav>
+      <form action="#" class="window__body dialogue__form-number">
+        <p class="label">Введите название IT-предприятия</p>
+        <input name="answer" type="number" class="input" placeholder="Введите значение">
+        <button class="button" type="submit">Далее</button>
+      </form>
+    </div>
     <div class="window dialogue dialogue_output">
       <nav class="window__toolbar">
-        <p>Панель управления</p>
+        <p>.js</p>
         <div class="panel">
           <hr class="escape">
           <hr class="fullscreen">
@@ -112,19 +147,6 @@
       <div class="window__body">
         <p class="label">Вывод</p>
         <p></p>
-      </div>
-    </div>
-    <div class="window dialogue dialogue_alert">
-      <nav class="window__toolbar">
-        <p>Панель управления</p>
-        <div class="panel">
-          <hr class="escape">
-          <hr class="fullscreen">
-          <hr class="close">
-        </div>
-      </nav>
-      <div class="window__body dialogue__form">
-        <p class="label"></p>
       </div>
     </div>
   </main>

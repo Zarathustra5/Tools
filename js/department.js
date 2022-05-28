@@ -20,35 +20,28 @@ class Department{
             this._projects[i] = this._projects[i - 1];
           }
           this._projects[indexOfProject] = new Project(projectName);
-          return 2;
         }else{
           for (let i = this._projects.length; i > indexOfProject; i--){
             this._projects[i] = this._projects[i - 1];
           }
           this._projects[indexOfProject + 1] = new Project(projectName);
-          return 2;
         }
       }else{
-        return 0;
+        return -1;
       }
     }else{
       this._projects.push(new Project(projectName));
-      return 1;
     }
   }
   deleteProject(projectName){       //Метод удаления проекта
-    if (this._projects.length > 0){
-      let indexOfProject = this.searchProject(projectName);
-      if (indexOfProject !== null){
-        for (let i = indexOfProject; i < this._projects.length; i++){
-          this._projects[i] = this._projects[i + 1];
-        }
-        this._projects.pop();
-      }else{
-        alert("Проект не найден");
+    let indexOfProject = this.searchProject(projectName);
+    if (indexOfProject !== null){
+      for (let i = indexOfProject; i < this._projects.length; i++){
+        this._projects[i] = this._projects[i + 1];
       }
+      this._projects.pop();
     }else{
-      alert("Проектов нет");
+      return -1;
     }
   }
   searchProject(projectName){  //Метод поиска проекта
@@ -76,42 +69,17 @@ class Department{
     return res;
   }
   chooseProject(projectName){       //Метод выбора проекта, с которым будем работать
-    let isProjectMenuActive = true;
-    function projectMenu(currentProject){
-      switch(prompt(`Проект: ${currentProject.getName}\n1.Вывести название проекта\n2.Поменять название проекта\n3.Вывести объем финансов\n4.Изменить объем финансов\n5.Вывести всю информацию\n6.Вернуться в меню отдела`)){
-        case "1":
-          alert(currentProject.getName);
-          break;
-        case "2":
-          currentProject.setName = prompt("Введите новое название");
-          break;
-        case "3":
-          alert(currentProject.getFinance);
-          break;
-        case "4":
-          currentProject.setFinance = prompt("Введите новый объем финансирования");
-          break;
-        case "5":
-          alert(currentProject.getInfo);
-          break;
-        case "6":
-          isProjectMenuActive = false;
-          break;
-        default:
-          alert("Введите верное значение");
-          break;
+    for (let el of this._projects){
+      if (el.getName == projectName){
+        return el;
       }
     }
-    if (this._projects.length > 0){
-      let indexOfProject = this.searchProject(projectName);
-      let currentProject = this._projects[indexOfProject];
-      if (currentProject){
-        while(isProjectMenuActive){projectMenu(currentProject)}
-      }else{
-        alert("Проект не найден");
-      }
-    }else{
-      alert("Проектов нет");
-    }
+    return null;
+  }
+  get hasProjects(){
+    return this._projects.length == 0 ? false : true;
+  }
+  get getProjects(){
+    return this._projects;
   }
 }
