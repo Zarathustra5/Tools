@@ -57,16 +57,27 @@ class Company{
     return null;
   }
   downloadCompany(obj){
-    let pTempTo = this._pCaption._next;
-    let pTempFrom = obj._pCaption._next;
-    while (pTempFrom != null){
-      pTempTo = new Department(pTempFrom._name);
-      for (let i = 0; i < pTempFrom._projects.length; i++){
-        pTempTo._projects[i] = new Project(pTempFrom._projects[i]._name);
-        pTempTo._projects[i].setFinance = pTempFrom._projects[i]._finance;
+    let pTemp = obj._pCaption._next;
+    if (pTemp != null){
+      this._pCaption._next = new Department(pTemp._name);
+      this._pLast = this._pCaption._next;
+      for (let el of pTemp._projects){
+        this._pLast._projects.push(new Project(el._name));
+        this._pLast._projects[this._pLast._projects.length - 1].setFinance = el._finance;
       }
-      pTempTo = pTempTo._next;
-      pTempFrom = pTempFrom._next;
     }
+    pTemp = obj._pCaption._next._next;
+    while (pTemp != null){
+      this._pLast._next = new Department(pTemp._name);
+      this._pLast = this._pLast._next;
+      for (let el of pTemp._projects){
+        this._pLast._projects.push(new Project(el._name));
+        this._pLast._projects[this._pLast._projects.length - 1].setFinance = el._finance;
+      }
+      pTemp = pTemp._next;
+    }
+  }
+  get getCaption(){
+    return this._pCaption;
   }
 }

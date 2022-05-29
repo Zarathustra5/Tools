@@ -24,21 +24,34 @@ openBtn.onclick = () => {
 //Кнопка сохранить в файл
 let saveBtn = document.querySelector("button.save");
 saveBtn.onclick = () => {
-  let obj = JSON.stringify(itCompany);
-  localStorage.setItem("1", obj);
-  console.log("save done");
+  input("Введите название нового файла");
+  submit(answer => {
+    let obj = JSON.stringify(itCompany);
+    localStorage.setItem(answer, obj);
+    console.log("save done");
+  });
 }
 
 //Кнопка выгрузки из файла
 let downloadBtn = document.querySelector("button.download");
 downloadBtn.onclick = () => {
-  let obj = localStorage.getItem("1");
-  obj = JSON.parse(obj);
-  itCompany = new Company(obj._name);
-  console.dir(obj);
-  itCompany.downloadCompany(obj);
-  console.log("download done");
-  console.dir(itCompany);
+  input("Введите название файла");
+  submit(answer => {
+    let obj = localStorage.getItem(answer);
+    obj = JSON.parse(obj);
+    itCompany = new Company(obj._name);
+    itCompany.downloadCompany(obj);
+    console.log("download done");
+    console.dir(itCompany);
+    tableCompanyTitle.textContent = itCompany.getName;
+    tableCompany.lastElementChild.remove();
+    tableCompany.insertAdjacentHTML("beforeend", `<tbody></tbody>`);
+    let pTemp = itCompany.getCaption._next;
+    while (pTemp != null){
+      tableCompany.lastElementChild.insertAdjacentHTML("beforeend", `<tr class="${pTemp.getName}" title="Кликните для просмотра проектов"><td>${pTemp.getName}</td><td>${pTemp.getProjects.length}</td><td>${pTemp.countFinance()}$</td></tr>`);
+      pTemp = pTemp._next;
+    }
+  });
 }
 
 //Кнопка закрыть
