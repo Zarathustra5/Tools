@@ -21,6 +21,26 @@ openBtn.onclick = () => {
   company.classList.add("_active");
 }
 
+//Кнопка сохранить в файл
+let saveBtn = document.querySelector("button.save");
+saveBtn.onclick = () => {
+  let obj = JSON.stringify(itCompany);
+  localStorage.setItem("1", obj);
+  console.log("save done");
+}
+
+//Кнопка выгрузки из файла
+let downloadBtn = document.querySelector("button.download");
+downloadBtn.onclick = () => {
+  let obj = localStorage.getItem("1");
+  obj = JSON.parse(obj);
+  itCompany = new Company(obj._name);
+  console.dir(obj);
+  itCompany.downloadCompany(obj);
+  console.log("download done");
+  console.dir(itCompany);
+}
+
 //Кнопка закрыть
 let closeBtn = document.querySelectorAll("hr.close");
 closeBtn.forEach(el => {
