@@ -74,6 +74,14 @@ fullscreenBtn.forEach(el => {
   }
 });
 
+//Ассинхронность выбора элемента
+function choose(callback){
+  let projects = document.querySelectorAll(".table_department tbody tr");
+  projects.forEach(el => {
+    el.onclick = () => callback(el); 
+  });
+}
+
 //Асинхронность ввода текста
 function submit(callback){
   dialogueForm.onsubmit = () => callback(answer); 
@@ -206,9 +214,10 @@ function addProject() {
     input("перед/после: ");
     submit(answer => {
       beforeAfter = answer;
-      input("Введите название проекта из списка: ");
-      submit(answer => {
-        projectFromList = answer;
+      output("Кликните по элементу из таблицы");
+      choose(answer => {
+        dialogueOutput.classList.remove("_active");
+        projectFromList = answer.className;
         input("Введите название проекта: ");
         submit(answer => {
           let result = currentDepartment.addProject(answer, projectFromList, beforeAfter); 
