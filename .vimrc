@@ -2,6 +2,7 @@ set number
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set backupdir=~/tmp
 
 set hlsearch
 set incsearch
@@ -15,11 +16,12 @@ Plug 'morhetz/gruvbox'
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nelsyeung/twig.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 syntax on
 colorscheme gruvbox
 let g:user_emmet_install_global=0
-autocmd FileType html,css,vue,php,twig EmmetInstall
+autocmd FileType html,css,vue,php,twig,js EmmetInstall
 let g:user_emmet_leader_key=','
 
 "mappings (Горячие клавиши)
