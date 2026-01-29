@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # dict.sh
 
-for i in $(seq 13620243 99999999); do
-  printf '%08d\n' $i >> 0-9-8.txt
-done
+# run this to generate the dictionary
+# crunch 8 8 0123456789 -o 0-8_9.txt
+
+# run this to use generated dictionary
+# sudo aircrack-ng -w 0-9_8.txt -b 00:00:00:00:00:00 hs/handshake.cap
